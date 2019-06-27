@@ -45,7 +45,7 @@ public class Main {
             NumberFormat nf = NumberFormat.getInstance();
             nf.setMinimumFractionDigits(3);
             out.println("Case " + cases + ": average length between pages = " + nf.format(avgLen) + " clicks");
-
+            cases++;
         } while (!(str = br.readLine()).equals("0 0"));
         out.flush();
     }
