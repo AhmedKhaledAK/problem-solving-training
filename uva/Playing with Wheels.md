@@ -20,7 +20,7 @@ public class Main {
         int[] target = new int[L];
         int[] forbid = new int[L];
         HashMap<String, Boolean> visited = new HashMap<>(10000);
-        HashMap<String, Integer> position = new HashMap<>();
+        HashMap<String, Integer> position = new HashMap<>(10000);
         for (int i = 0; i < t; i++) {
 
             for (int j = 0; j < L; j++)
