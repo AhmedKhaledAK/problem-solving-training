@@ -1,0 +1,106 @@
+//https://codeforces.com/problemset/problem/602/B
+import java.io.*;
+import java.net.Socket;
+import java.security.spec.ECField;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+import static java.util.Arrays.sort;
+ 
+ 
+public class Main {
+ 
+    static int a[];
+    static int l[];
+    static int arr[];
+    static HashMap<Integer, Boolean> map = new HashMap<>();
+ 
+    public static void main (String [] args) throws Exception {
+        InputReader reader = new InputReader();
+        PrintWriter out = new PrintWriter(System.out);
+ 
+        int n, last=0,ans=0;
+ 
+        n = reader.nextInt();
+        arr=new int[n];
+        int []step=new int[n];
+ 
+        for(int i =0 ; i < n ; i++)
+        {
+            arr[i]=reader.nextInt();
+ 
+        }
+        for(int i =0 ; i < n-1; i++)
+        {
+            step[i]= arr[i]-arr[i+1];
+ 
+        }
+ 
+ 
+        int temp = 0 ,old=0;
+        for(int i =0 ; i < n-1; i++)
+        {
+          //System.out.print ( step[i]+" ");
+ 
+ 
+ 
+ 
+            if(step[i] != 0 && step[i] == last ) // two con
+            {
+                ans=Math.max(temp , ans);
+                temp=0;
+                temp= i - old;
+            }else{
+                temp++;
+                ans=Math.max(ans,temp);
+ 
+            }
+ 
+            if(step[i] != 0 ){
+                old=i;
+                last= step[i];
+            }
+ 
+ 
+ 
+        }
+ 
+        System.out.println(ans+1);
+ 
+ 
+        out.flush();
+    }
+ 
+ 
+ 
+    static class InputReader {
+        BufferedReader reader;
+        StringTokenizer tokenizer;
+ 
+        InputReader() {
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            tokenizer = null;
+        }
+ 
+        String next() {
+            while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+                try {
+                    tokenizer = new StringTokenizer(reader.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return tokenizer.nextToken();
+        }
+ 
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+ 
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+    }
+}
