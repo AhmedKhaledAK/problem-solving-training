@@ -1,0 +1,67 @@
+//https://codeforces.com/problemset/problem/603/A
+import java.io.*;
+import java.net.Socket;
+import java.security.spec.ECField;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+import static java.util.Arrays.sort;
+ 
+ 
+public class Main {
+ 
+    static int a[];
+    static int l[];
+    static int ans[];
+    static HashMap<Integer, Boolean> map = new HashMap<>();
+ 
+    public static void main (String [] args) throws Exception {
+        InputReader reader = new InputReader();
+        PrintWriter out = new PrintWriter(System.out);
+ 
+        int n, k;
+        String str;
+        n = reader.nextInt();
+        str=reader.next();
+        int ans=1;
+        for(int i = 1 ; i < str.length();i++)
+        {
+            if(str.charAt(i)!=str.charAt(i-1))ans++;
+        }
+        out.print(Math.min(n,ans+2));
+        out.flush();
+    }
+ 
+ 
+ 
+    static class InputReader {
+        BufferedReader reader;
+        StringTokenizer tokenizer;
+ 
+        InputReader() {
+            reader = new BufferedReader(new InputStreamReader(System.in));
+            tokenizer = null;
+        }
+ 
+        String next() {
+            while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+                try {
+                    tokenizer = new StringTokenizer(reader.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return tokenizer.nextToken();
+        }
+ 
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+        double nextDouble() {
+            return Double.parseDouble(next());
+        }
+ 
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+    }
+}
