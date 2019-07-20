@@ -16,7 +16,6 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-
 const int N = 6;
 
 int main() {
@@ -29,8 +28,7 @@ int main() {
         cin >> arr[i];
 
     for(int i =0; i < N; i++){
-        for (int j = 0; j < N; ++j) {
-            if(j == i) continue;
+        for (int j = i+1; j < N; ++j) {
             for(int k = 0; k < N; k++){
                 if(k == i || k == j) continue;
                 int sum_one = arr[i] + arr[j] + arr[k];
