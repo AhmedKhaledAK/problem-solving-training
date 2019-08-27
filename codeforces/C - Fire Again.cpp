@@ -19,6 +19,7 @@
 #define lp(n) for(int i=0; i<n; i++)
 #define loop(n) for(int j=0; j<n; j++)
 #define iii pair<int,pair<int,int>>
+#define ii pair<int,int>
 
 using namespace std;
 
@@ -30,7 +31,7 @@ int row[] = {-1,1,0,0};
 int col[] = {0,0,-1,1};
 bool visited[N][M];
 int sp[N][M];
-queue<iii> pq;
+queue<ii> pq;
 
 bool checkChild(int r, int c, int i, int j){
     return i >= 0 && i <= r - 1 && j >= 0 && j <= c - 1;
@@ -38,46 +39,27 @@ bool checkChild(int r, int c, int i, int j){
 
 void bfs(){
 
+    ii pairs;
+
     while(!pq.empty()){
-        iii pairs=pq.front();
+        pairs=pq.front();
         pq.pop();
-        int i = pairs.second.first;
-        int j = pairs.second.second;
-        int p = pairs.first;
+        int i = pairs.first;
+        int j = pairs.second;
 
         for(int g =0; g < 4; g++){
             int ni = i+row[g];
             int nj = j+col[g];
             if(checkChild(n,m,ni,nj)){
-                if(p+1 < sp[ni][nj]){
-                    sp[ni][nj]=p+1;
-                    iii pairs2;
-                    pairs2.first = sp[ni][nj];
-                    pairs2.second.first = ni;
-                    pairs2.second.second = nj;
-                    pq.push(pairs2);
+                if(sp[i][j]+1 < sp[ni][nj]){
+                    sp[ni][nj]=sp[i][j]+1;
+                    pq.push(make_pair(ni,nj));
                 }
             }
         }
     }
-}
 
-void solve(){
-
-    bfs();
-
-    int ans = INT_MIN;
-    int r,c;
-    for(int i=0; i<n;i++){
-        for(int j=0;j<m;j++){
-            if(sp[i][j] > ans){
-                ans = sp[i][j];
-                r=i+1;
-                c=j+1;
-            }
-        }
-    }
-    printf("%d %d", r,c);
+    cout << pairs.first+1 << " " << pairs.second+1;
 }
 
 int main(int argc, const char * argv[]) {
@@ -98,14 +80,10 @@ int main(int argc, const char * argv[]) {
     lp(k){
         scanf("%d%d",&x,&s);
         sp[x-1][s-1] = 0;
-        iii pairs;
-        pairs.first = sp[x-1][s-1];
-        pairs.second.first = x-1;
-        pairs.second.second = s-1;
-        pq.push(pairs);
+        pq.push(make_pair(x-1,s-1));
     }
 
-    solve();
+    bfs();
 
     return 0;
 }
