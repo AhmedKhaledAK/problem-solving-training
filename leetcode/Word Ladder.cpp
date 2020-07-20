@@ -7,7 +7,7 @@ public:
             return 0;
         }
         
-        set<string> S(wordList.begin(), wordList.end());
+        unordered_set<string> S(wordList.begin(), wordList.end());
         
         if (S.find(endWord) == S.end()) {
             return 0;
