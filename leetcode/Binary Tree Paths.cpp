@@ -29,16 +29,13 @@ public:
     }
     
     void dfs(TreeNode *node, vector<vector<int>> & ret, vector<int> & path) {
-        if (node == NULL) {
-            return;
-        }
-        if (node->left == NULL && node->right == NULL) {
-            path.push_back(node->val);
-            ret.push_back(path);
-            path.pop_back();
+        if (!node) {
             return;
         }
         path.push_back(node->val);
+        if (!node->left && !node->right) {
+            ret.push_back(path);
+        }
         dfs(node->left, ret, path);
         dfs(node->right, ret, path);
         path.pop_back();
