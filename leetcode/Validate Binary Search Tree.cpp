@@ -12,27 +12,19 @@
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
-        long long limit1, limit2;
-        limit1 = limit2 = LONG_MAX;
-        return helper(root, limit1, limit2);
+        long long int min_value = LONG_MIN;
+        long long int max_value = LONG_MAX;
+        return validateBST(root, min_value, max_value);
     }
-    bool helper(TreeNode* root, long long& limit1, long long& limit2) {
-        if (root == NULL) {
+    
+    bool validateBST(TreeNode* node, long long int min_value, long long int max_value) {
+        if (!node) {
             return true;
         }
-        long long val = root->val;
-        if (limit1 != LONG_MAX && val >= limit1) {
+        if (node->val < min_value || node->val > max_value) {
             return false;
         }
-        if (limit2 != LONG_MAX && val <= limit2) {
-            return false;
-        }
-        if (!helper(root->left, val, limit2)) {
-            return false;
-        }
-        if (!helper(root->right, limit1, val)) {
-            return false;
-        }
-        return true;
+        return (validateBST(node->left, min_value, (long long int) node->val - 1) && 
+               validateBST(node->right, (long long int) node->val + 1, max_value));
     }
 };
