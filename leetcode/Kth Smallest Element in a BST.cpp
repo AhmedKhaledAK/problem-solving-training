@@ -10,24 +10,22 @@
  * };
  */
 class Solution {
+    int element;
 public:
     int kthSmallest(TreeNode* root, int k) {
-        int cnt = 0, smallest = INT_MIN;
-        traverse(root, k, cnt, smallest);
-        return smallest;
+        int kk = 0;
+        getKth(root, k, kk);
+        return element;
     }
     
-    void traverse (TreeNode* node, int k, int& cnt, int& smallest) {
-        if (smallest != INT_MIN) {
+    void getKth(TreeNode* node, int k, int& kk) {
+        if (!node) return;
+        getKth(node->left, k, kk);
+        kk++;
+        if(kk == k) {
+            element = node->val;
             return;
         }
-        if (node == NULL) {
-            return;
-        }
-        traverse(node->left, k, cnt, smallest);
-        if (++cnt == k) {
-            smallest = node->val;
-        }
-        traverse(node->right, k, cnt, smallest);
+        getKth(node->right, k, kk);
     }
 };
